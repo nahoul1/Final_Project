@@ -1,3 +1,6 @@
+from itertools import permutations
+
+
 class Modify:
 
     def __init__(self, new_f):
@@ -15,24 +18,32 @@ class Suggest:
     @staticmethod
     def sing_transposition(wrongs):
         sug = []
+        trans = []
         for ele in wrongs:
-            temp = list(ele)
-            trans = []
-            for i in temp:
-                res = ele[:]
-                ele[i], ele[i-1] = ele[i-1], ele[i]
-                trans.append(res)
+            res = ele[:]
+            temp = list(res)
+            perm = permutations(temp)
+            for i in list(perm):
+                trans.append(i)
+        attempts = []
+        for ele in trans:
+            attempt = ''
+            for x in ele:
+                attempt += x
+            attempts.append(attempt)
         k = {}
         with open('all_words.txt', encoding='utf8') as f:
             for word in f:
                 word = word.strip().lower()
                 k[word] = word
-        for ele in trans:
-            if trans[ele] in k:
-                sug.append(trans[ele])
-        return sug
-
-
+        for word in attempts:
+            if word in k:
+                sug.append(word)
+        suggestions = []
+        for i in sug:
+            if i not in suggestions:
+                suggestions.append(i)
+        return suggestions
 
 
 """

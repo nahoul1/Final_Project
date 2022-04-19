@@ -21,4 +21,6 @@ new = new.split()
 for word in new:
     if word not in all_words:
         wrong.append(word)
+
+print("The word(s)", wrong, "are spelled incorrectly.\n Did you mean:")
 print(Suggest.sing_transposition(wrong))
