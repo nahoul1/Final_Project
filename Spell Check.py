@@ -1,5 +1,5 @@
 
-from Fix_Words import Modify
+from Fix_Words import Modify, Suggest
 # create dictionary with every word and cross-check words with
 
 all_words = {}
@@ -11,11 +11,14 @@ with open('all_words.txt', encoding='utf8') as f:
 
 
 with open('tests.txt', encoding='utf8') as t:
-    for word in t:
-        new = word.strip().lower().split()
+    new = t.read()
 
 wrong = []
+new = Modify.remove_punc(new)
+new = new.split()
+
+
 for word in new:
     if word not in all_words:
         wrong.append(word)
-
+print(Suggest.sing_transposition(wrong))
