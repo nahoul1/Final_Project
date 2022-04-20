@@ -4,6 +4,12 @@ from Suggestions import Suggest
 class Modify:
 
     @staticmethod
+    def original(file):
+        with open(file, encoding='utf8') as t:
+            new = t.read()
+        print(new)
+
+    @staticmethod
     def remove_punc(words):
         """
         Removes all punctuation from the textfile so words can be crosschecked with dictionary
@@ -36,6 +42,7 @@ class Modify:
         for word in new:
             if word not in all_words:
                 wrong.append(word)
-        print("The word(s)", wrong, "are spelled incorrectly.\n Did you mean:")
-        print(Suggest.sing_transposition(wrong))
+        for word in wrong:
+            print(word, "is spelled incorrectly, did you mean:")
+            print(Suggest.sing_transposition(word), Suggest.double_letters(word))
 

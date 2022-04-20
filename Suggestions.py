@@ -14,12 +14,9 @@ class Suggest:
         tran = []
 
         # turns each word into a list of its letters
-        for ele in wrongs:
-            res = ele[:]
-            temp = list(res)
-            perm = permutations(temp)  # all permutations of current incorrectly spelled word
-            for i in list(perm):
-                tran.append(i)  # puts all permuted lists of letters into one list
+        perm = permutations(wrongs)  # all permutations of current incorrectly spelled word
+        for i in list(perm):
+            tran.append(i)  # puts all permuted lists of letters into one list
         attempts = []
 
         # turns each list of letters into a string
@@ -43,7 +40,10 @@ class Suggest:
         for i in sug:
             if i not in suggestions:
                 suggestions.append(i)
-        return suggestions
+        if suggestions:
+            return suggestions
+        else:
+            return ''
 
     @staticmethod
     def double_letters(wrongs):
@@ -54,13 +54,12 @@ class Suggest:
         """
         sug = []
         tran = []
-        for ele in wrongs:
-            res = ele[:]
-            temp = list(res)
-            for i in range(len(temp) - 1):
-                if temp[i] == temp[i - 1]:
-                    del temp[i]
-            tran.append(temp)
+
+        temp = list(wrongs)
+        for i in range(len(temp) - 1):
+            if temp[i] == temp[i - 1]:
+                del temp[i]
+        tran.append(temp)
         attempts = []
         for ele in tran:
             attempt = ''
@@ -80,4 +79,15 @@ class Suggest:
         for i in sug:
             if i not in suggestions:
                 suggestions.append(i)
-        return suggestions
+        if suggestions:
+            return suggestions
+        else:
+            return ''
+
+    @staticmethod
+    def something(wrongs):
+        """
+
+        :param wrongs:
+        :return:
+        """
