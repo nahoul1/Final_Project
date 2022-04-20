@@ -85,9 +85,24 @@ class Suggest:
             return ''
 
     @staticmethod
-    def something(wrongs):
+    def fix(file, word, right, ind):
         """
-
-        :param wrongs:
-        :return:
+        Fixes and eventually outputs the modified original text file.
+        :param file: original textfile
+        :param word: originally misspelled word
+        :param right: the array of options
+        :param ind: the index of the word
+        :return: modified text file
         """
+        f = open(file, "r+")
+        l = f.readlines()
+        for i in range(len(right)):
+            if ind == i:
+                fix = right[i]
+        for ele in l:
+            if word in ele:
+                replacement = ele.replace(word, fix)
+                l = replacement
+        f.truncate(0)
+        f.seek(0)
+        f.writelines(l)

@@ -44,5 +44,11 @@ class Modify:
                 wrong.append(word)
         for word in wrong:
             print(word, "is spelled incorrectly, did you mean:")
-            print(Suggest.sing_transposition(word), Suggest.double_letters(word))
-
+            p = Suggest.sing_transposition(word)
+            k = Suggest.double_letters(word)
+            w = [*p, *k]
+            print(w)
+            n = int(input("Enter the number of the correct word's place: "))
+            Suggest.fix(file, word, w, n-1)
+        print("The corrected text is:")
+        print(Modify.original(file))
