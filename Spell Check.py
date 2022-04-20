@@ -1,7 +1,7 @@
 from Fix_Words import Modify
 import PySimpleGUI as sg
 
-# create dictionary with every word and cross-check words with
+# creates window
 layout = [
         [sg.Text("                Spell Checker: ", size=(30, 3))],
         [sg.Text("Please enter the name of the .txt textfile", size=(30, 1)), sg.InputText()],

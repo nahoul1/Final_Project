@@ -55,18 +55,23 @@ class Suggest:
         sug = []
         tran = []
 
+        # deletes double consecutive occurrences of a letter in a word
         temp = list(wrongs)
         for i in range(len(temp) - 1):
             if temp[i] == temp[i - 1]:
                 del temp[i]
         tran.append(temp)
+
         attempts = []
+        # puts the word back into a list
         for ele in tran:
             attempt = ''
             for x in ele:
                 attempt += x
             attempts.append(attempt)
+
         all_words = {}
+        # creates super dictionary
         with open('all_words.txt', encoding='utf8') as f:
             for word in f:
                 word = word.strip().lower()
@@ -74,6 +79,7 @@ class Suggest:
         for word in attempts:
             if word in all_words:
                 sug.append(word)
+
         suggestions = []
         # checks to see if permutations are real words and returns list of ones that are
         for i in sug:
@@ -94,15 +100,18 @@ class Suggest:
         :param ind: the index of the word
         :return: modified text file
         """
+        # opens the file and finds the incorrect word
         f = open(file, "r+")
         l = f.readlines()
         for i in range(len(right)):
             if ind == i:
-                fix = right[i]
+                corr = right[i]
+        # replace incorrect word with correct word
         for ele in l:
             if word in ele:
-                replacement = ele.replace(word, fix)
+                replacement = ele.replace(word, corr)
                 l = replacement
+        # fix the text file
         f.truncate(0)
         f.seek(0)
         f.writelines(l)
