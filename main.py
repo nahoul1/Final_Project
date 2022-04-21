@@ -1,17 +1,16 @@
-import PySimpleGUI as sg
 from Fix_Words import Modify
+import PySimpleGUI as sg
 
-# create dictionary with every word and cross-check words with
+# creates window
 layout = [
-        [sg.Text("                Spell Checker: ", size=(30, 3))],
-        [sg.Text("Please enter the name of the .txt textfile", size=(30, 1)), sg.InputText()],
-        [sg.Submit()]
+        [sg.Text('Spell Checker')],
+        [sg.Text("Enter the name of the text file you want to check:"), sg.Input()],
+        [sg.Submit("Submit")]
         ]
-sg.theme('BlueMono')
-window = sg.Window("Spell Checker", layout, margins=(150, 150))
+
+window = sg.Window("Spell Checker", layout,)
 event, values = window.read()
+print("The original is: ")
 
-k = Modify.original(values[0])
-w = Modify.check(values[0])
-
-sg.Window(k, layout=[[]], margins=(150, 150)).read()
+Modify.original(values[0])
+Modify.check(values[0])

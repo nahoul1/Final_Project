@@ -4,11 +4,11 @@ from itertools import permutations
 class Suggest:
 
     @staticmethod
-    def sing_transposition(wrongs):
+    def transposition(wrongs):
         """
-        Checks for single transpositions of incorrectly spelled words that are real words
-        :param wrongs: List of incorrectly spelled words
-        :return: List of suggestions the words can be
+        Checks for all transpositions of incorrectly spelled words that are real words
+        :param wrongs: incorrectly spelled word
+        :return: List of suggestions the word can be
         """
         sug = []
         tran = []
@@ -49,7 +49,7 @@ class Suggest:
     def double_letters(wrongs):
         """
         Checks for double letters in incorrectly spelled words to see if that was the mistake
-        :param wrongs: Incorrectly spelled words
+        :param wrongs: Incorrectly spelled word
         :return: List of suggestions words can be
         """
         sug = []
@@ -91,6 +91,32 @@ class Suggest:
             return ''
 
     @staticmethod
+    def remove_last(wrongs):
+        """
+
+        :param wrongs: Incorrectly spelled word
+        :return: list of suggestions for word
+        """
+        # removes last letter from word
+        name = wrongs[:-1]
+
+        all_words = {}
+        # creates super dictionary
+        with open('all_words.txt', encoding='utf8') as f:
+            for word in f:
+                word = word.strip().lower()
+                all_words[word] = word
+        names = []
+
+        # if the word is real, return it
+        if name in all_words:
+            names.append(name)
+        if names:
+            return names
+        else:
+            return ''
+
+    @staticmethod
     def fix(file, word, right, ind):
         """
         Fixes and eventually outputs the modified original text file.
@@ -101,16 +127,20 @@ class Suggest:
         :return: modified text file
         """
         # opens the file and finds the incorrect word
+        if right[ind] == 'Not an option':
+            return
         f = open(file, "r+")
         l = f.readlines()
         for i in range(len(right)):
             if ind == i:
                 corr = right[i]
+
         # replace incorrect word with correct word
         for ele in l:
             if word in ele:
                 replacement = ele.replace(word, corr)
                 l = replacement
+
         # fix the text file
         f.truncate(0)
         f.seek(0)

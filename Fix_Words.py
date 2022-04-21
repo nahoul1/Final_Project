@@ -7,7 +7,7 @@ class Modify:
     def original(file):
         with open(file, encoding='utf8') as t:
             new = t.read()
-        print(new)
+        return new
 
     @staticmethod
     def remove_punc(words):
@@ -27,6 +27,7 @@ class Modify:
         :param file: Text file with words that will be checked
         :return: All the incorrect words and suggestions
         """
+
         all_words = {}
         # creates super dictionary
         with open('all_words.txt', encoding='utf8') as f:
@@ -45,11 +46,13 @@ class Modify:
         for word in new:
             if word not in all_words:
                 wrong.append(word)
+        # traverses list and gives suggestions
         for word in wrong:
             print(word, "is spelled incorrectly, did you mean:")
-            p = Suggest.sing_transposition(word)  # suggestions using single transposition method
+            p = Suggest.transposition(word)  # suggestions using permutation method
             k = Suggest.double_letters(word)  # suggestions using double method
-            w = [*p, *k]
+            j = Suggest.remove_last(word)  # suggestions removing the last letter
+            w = [*p, *k, *j, 'Not an option']
             print(w)
             n = int(input("Enter the number of the correct word's place: "))
             Suggest.fix(file, word, w, n-1)  # fixes the original text file
