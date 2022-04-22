@@ -1,4 +1,5 @@
 from Suggestions import Suggest
+from Suggestions import Fix
 
 
 class Modify:
@@ -7,12 +8,14 @@ class Modify:
     def original(file):
         with open(file, encoding='utf8') as t:
             new = t.read()
-        return new
+        print("The original text is: ")
+        print(new)
 
     @staticmethod
     def remove_punc(words):
         """
-        Removes all punctuation from the textfile so words can be crosschecked with dictionary
+        Removes all punctuation from the textfile so words can
+        be crosschecked with dictionary
         :param words: words in the text file
         :return:The words without any punctuation
         """
@@ -55,6 +58,6 @@ class Modify:
             w = [*p, *k, *j, 'Not an option']
             print(w)
             n = int(input("Enter the number of the correct word's place: "))
-            Suggest.fix(file, word, w, n-1)  # fixes the original text file
+            Fix.fix(file, word, w, n-1)  # fixes the original text file
         print("The corrected text is:")
         print(Modify.original(file))

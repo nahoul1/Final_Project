@@ -1,20 +1,11 @@
 from Fix_Words import Modify
-import PySimpleGUI as sg
+from GUI import GUI
 
+# opens window to type in text file
+values = GUI.open()
 
-# creates window
-layout = [
-        [sg.Text("                Spell Checker: ")],
-        [sg.Text("Please enter the name of the .txt textfile", size=(30, 1)), sg.InputText()],
-        [sg.Submit()]
-        ]
-sg.theme('BlueMono')
-window = sg.Window("Spell Checker", layout,)
-event, values = window.read()
-window.close()
-
-
-print("The original text is: ")
+# displays original text
 Modify.original(values[0])
 
+# spell checks and offers suggestions
 Modify.check(values[0])
