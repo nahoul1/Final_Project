@@ -81,7 +81,7 @@ class Suggest:
                 sug.append(word)
 
         suggestions = []
-        # checks to see if permutations are real words and returns list of ones that are
+        # checks to see if words are real words and returns list of ones that are
         for i in sug:
             if i not in suggestions:
                 suggestions.append(i)
@@ -113,12 +113,13 @@ class Suggest:
                 word = word.strip().lower()
                 all_words[word] = word
 
+        # checks to see if changes are real words and
         for word in tran:
             if word in all_words:
                 sug.append(word)
 
         suggestions = []
-        # checks to see if changes are real words and returns list of ones that are
+        # returns list of ones that are
         for i in sug:
             if i not in suggestions:
                 suggestions.append(i)
