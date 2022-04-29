@@ -8,7 +8,6 @@ class Modify:
     def original(file):
         with open(file, encoding='utf8') as t:
             new = t.read()
-        print("The original text is: ")
         print(new)
 
     @staticmethod
@@ -55,9 +54,12 @@ class Modify:
             p = Suggest.transposition(word)  # suggestions using permutation method
             k = Suggest.double_letters(word)  # suggestions using double method
             j = Suggest.remove_last(word)  # suggestions removing the last letter
-            w = [*p, *k, *j, 'Not an option']
+            v = Suggest.remove_first(word)
+            c = Suggest.single_letters(word)
+            w = [*p, *k, *j, *v, *c, 'Not an option']
             print(w)
             n = int(input("Enter the number of the correct word's place: "))
             Fix.fix(file, word, w, n-1)  # fixes the original text file
         print("The corrected text is:")
         print(Modify.original(file))
+        return ''

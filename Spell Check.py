@@ -5,6 +5,7 @@ from GUI import GUI
 values = GUI.open()
 
 # displays original text
+print("The original text is: ")
 Modify.original(values[0])
 
 # spell checks and offers suggestions
