@@ -9,6 +9,7 @@ class Modify:
         with open(file, encoding='utf8') as t:
             new = t.read()
         print(new)
+        return ''
 
     @staticmethod
     def remove_punc(words):
