@@ -100,19 +100,11 @@ class Suggest:
         sug = []
         tran = []
 
-        temp = list(wrongs)
+        temp = wrongs
         # adds letter
-        for i in range(len(temp) - 1):
-            temp.insert(i - 1, temp[i])
-            tran.append(temp)
-
-        attempts = []
-        # puts the word back into a list
-        for ele in tran:
-            attempt = ''
-            for x in ele:
-                attempt += x
-            attempts.append(attempt)
+        for i in range(len(temp)):
+            new = temp[:i] + temp[i] + temp[i:]
+            tran.append(new)
 
         all_words = {}
         # creates super dictionary
@@ -121,8 +113,12 @@ class Suggest:
                 word = word.strip().lower()
                 all_words[word] = word
 
+        for word in tran:
+            if word in all_words:
+                sug.append(word)
+
         suggestions = []
-        # checks to see if permutations are real words and returns list of ones that are
+        # checks to see if changes are real words and returns list of ones that are
         for i in sug:
             if i not in suggestions:
                 suggestions.append(i)
@@ -184,7 +180,6 @@ class Suggest:
             return names
         else:
             return ''
-        return ''
 
 
 class Fix:
