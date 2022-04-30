@@ -10,8 +10,6 @@ while gore:
     try:
         # displays original text
         print("The original text is: ")
-        if FileNotFoundError:
-            print("Non-existent")
 
         f = Modify(values[0])
         file = Behold(values[0])
@@ -19,6 +17,8 @@ while gore:
 
         # spell checks and offers suggestions
         Modify.check(f)
+        gore = False
 
     except FileNotFoundError:
+        print("Non-existent")
         values = GUI.open()
