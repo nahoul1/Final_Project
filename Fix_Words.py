@@ -68,8 +68,12 @@ class Modify:
             v = Suggest.remove_first(lexicon)  # suggestions removing the first letter
             c = Suggest.single_letters(lexicon)  # suggestions doubling each letter
             w = [*p, *k, *j, *v, *c, 'Not an option']
+
             print(w)
             n = int(input("Enter the number of the correct word's place: "))
+            while n > (len(w) - 1):
+                print("Invalid entry. Try again.")
+                n = int(input("Enter the number of the correct word's place: "))
             Fix.fix(self.file, word, w, n-1)  # fixes the original text file
         print("The corrected text is:")
         f = Behold(self.file)
