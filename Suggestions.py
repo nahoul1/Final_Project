@@ -3,18 +3,20 @@ from itertools import permutations
 
 class Suggest:
 
-    @staticmethod
-    def transposition(wrongs):
+    def __init__(self, wrongs, all_words):
+        self.wrongs = wrongs
+        self.all_words = all_words
+
+    def transposition(self):
         """
         Checks for all transpositions of incorrectly spelled words that are real words
-        :param wrongs: incorrectly spelled word
         :return: List of suggestions the word can be
         """
         sug = []
         tran = []
 
         # turns each word into a list of its letters
-        perm = permutations(wrongs)  # all permutations of current incorrectly spelled word
+        perm = permutations(self.wrongs)  # all permutations of current incorrectly spelled word
         for i in list(perm):
             tran.append(i)  # puts all permuted lists of letters into one list
         attempts = []
@@ -25,15 +27,10 @@ class Suggest:
             for x in ele:
                 attempt += x
             attempts.append(attempt)
-        # creates dictionary of every word
-        all_words = {}
-        with open('all_words.txt', encoding='utf8') as f:
-            for word in f:
-                word = word.strip().lower()
-                all_words[word] = word
+
         # puts all the strings into a list
         for word in attempts:
-            if word in all_words:
+            if word in self.all_words:
                 sug.append(word)
         suggestions = []
         # checks to see if permutations are real words and returns list of ones that are
@@ -45,18 +42,17 @@ class Suggest:
         else:
             return ''
 
-    @staticmethod
-    def double_letters(wrongs):
+    def double_letters(self):
         """
         Checks for double letters in incorrectly spelled words to see if that was the mistake
-        :param wrongs: Incorrectly spelled word
         :return: List of suggestions words can be
         """
         sug = []
         tran = []
 
         # deletes double consecutive occurrences of a letter in a word
-        temp = list(wrongs)
+        crate = self.wrongs
+        temp = list(crate)
         for i in range(len(temp) - 1):
             if temp[i] == temp[i - 1]:
                 del temp[i]
@@ -70,18 +66,13 @@ class Suggest:
                 attempt += x
             attempts.append(attempt)
 
-        all_words = {}
-        # creates super dictionary
-        with open('all_words.txt', encoding='utf8') as f:
-            for word in f:
-                word = word.strip().lower()
-                all_words[word] = word
+        # checks if word is real
         for word in attempts:
-            if word in all_words:
+            if word in self.all_words:
                 sug.append(word)
 
         suggestions = []
-        # checks to see if words are real words and returns list of ones that are
+        # checks to see if permutations are real words and returns list of ones that are
         for i in sug:
             if i not in suggestions:
                 suggestions.append(i)
@@ -90,36 +81,27 @@ class Suggest:
         else:
             return ''
 
-    @staticmethod
-    def single_letters(wrongs):
+    def single_letters(self):
         """
         Adds duplicate letters
-        :param wrongs: Incorrectly spelled word
         :return: list of suggestions for word
         """
         sug = []
         tran = []
 
-        temp = wrongs
+        temp = self.wrongs
         # adds letter
         for i in range(len(temp)):
             new = temp[:i] + temp[i] + temp[i:]
             tran.append(new)
 
-        all_words = {}
-        # creates super dictionary
-        with open('all_words.txt', encoding='utf8') as f:
-            for word in f:
-                word = word.strip().lower()
-                all_words[word] = word
-
-        # checks to see if changes are real words and
+        # checks if word is real
         for word in tran:
-            if word in all_words:
+            if word in self.all_words:
                 sug.append(word)
 
         suggestions = []
-        # returns list of ones that are
+        # checks to see if changes are real words and returns list of ones that are
         for i in sug:
             if i not in suggestions:
                 suggestions.append(i)
@@ -128,27 +110,18 @@ class Suggest:
         else:
             return ''
 
-    @staticmethod
-    def remove_first(wrongs):
+    def remove_first(self):
         """
         Removes first letter of word
-        :param wrongs: Incorrectly spelled word
         :return: list of suggestions for word
         """
 
         # removes first letter from word
-        name = wrongs[0:0] + wrongs[1:]
-
-        all_words = {}
-        # creates super dictionary
-        with open('all_words.txt', encoding='utf8') as f:
-            for word in f:
-                word = word.strip().lower()
-                all_words[word] = word
+        name = self.wrongs[0:0] + self.wrongs[1:]
         names = []
 
         # if the word is real, return it
-        if name in all_words:
+        if name in self.all_words:
             names.append(name)
             if names:
                 return names
@@ -156,26 +129,17 @@ class Suggest:
                 return ''
         return ''
 
-    @staticmethod
-    def remove_last(wrongs):
+    def remove_last(self):
         """
         Removes last letter of word
-        :param wrongs: Incorrectly spelled word
         :return: list of suggestions for word
         """
         # removes last letter from word
-        name = wrongs[:-1]
-
-        all_words = {}
-        # creates super dictionary
-        with open('all_words.txt', encoding='utf8') as f:
-            for word in f:
-                word = word.strip().lower()
-                all_words[word] = word
+        name = self.wrongs[:-1]
         names = []
 
         # if the word is real, return it
-        if name in all_words:
+        if name in self.all_words:
             names.append(name)
         if names:
             return names
