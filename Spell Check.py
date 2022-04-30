@@ -4,8 +4,8 @@ from GUI import GUI
 # opens window to type in text file
 values = GUI.open()
 
-gore = True
-while gore:
+run = True
+while run:
 
     try:
         # displays original text
@@ -17,7 +17,7 @@ while gore:
 
         # spell checks and offers suggestions
         Modify.check(f)
-        gore = False
+        run = False
 
     except FileNotFoundError:
         print("Non-existent")
