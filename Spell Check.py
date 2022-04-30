@@ -10,6 +10,8 @@ while gore:
     try:
         # displays original text
         print("The original text is: ")
+        if FileNotFoundError:
+            print("Non-existent")
 
         f = Modify(values[0])
         file = Behold(values[0])
