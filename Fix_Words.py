@@ -3,6 +3,7 @@ from Suggestions import Fix
 
 
 class Behold:
+    """Shows Textfile"""
     def __init__(self, file):
         self.file = file
 

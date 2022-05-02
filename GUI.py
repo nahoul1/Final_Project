@@ -5,6 +5,10 @@ class GUI:
 
     @staticmethod
     def open():
+        """
+        GUI
+        :return: values
+        """
         # creates window
         layout = [
             [sg.Text("                Spell Checker: ")],
