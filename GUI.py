@@ -2,12 +2,12 @@ import PySimpleGUI as sg
 
 
 class GUI:
-
+    """Opens GUI"""
     @staticmethod
     def open():
         """
         GUI
-        :return: values
+        :return: whatever is written in the box
         """
         # creates window
         layout = [

@@ -2,6 +2,7 @@ from itertools import permutations
 
 
 class Suggest:
+    """Edits words from String"""
 
     def __init__(self, wrongs, all_words):
         self.wrongs = wrongs
@@ -148,6 +149,7 @@ class Suggest:
 
 
 class Fix:
+    """Edits text file"""
 
     @staticmethod
     def fix(file, word, right, ind):
